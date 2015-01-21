@@ -14,6 +14,7 @@ set fish_plugins docker brew localhost node
 #set fish_custom $HOME/dotfiles/oh-my-fish
 
 set -x PATH $PATH $HOME/bin
+set -x PATH $PATH $HOME/opt/google-cloud-sdk/bin
 
 set -x LANG en_US.UTF-8
 set -x JAVA_HOME6 (/usr/libexec/java_home --version 1.6)
@@ -24,12 +25,12 @@ function jh6; set -x JAVA_HOME $JAVA_HOME6; end
 function jh7; set -x JAVA_HOME $JAVA_HOME7; end
 function jh8; set -x JAVA_HOME $JAVA_HOME8; end
 
-set -x JAVA_HOME $JAVA_HOME7
+set -x JAVA_HOME $JAVA_HOME8
 
 function mci; mvn clean install; end
 set -x MAVEN_OPTS "-Xmx3072m -XX:MaxPermSize=512m"
 
-function tower; gittower; end
+function tower; gittower $argv[1]; end
 
 function l; ls; end
 
@@ -47,9 +48,12 @@ function dh -d "Opens webbrowser to http://localdocker:<PORT> on given port"
   end
 end
 
-function b2d; boot2docker-cli $argv; end
+function b2d; boot2docker $argv; end
 
-set -x DOCKER_HOST tcp://localhost:4243
+
+set -x DOCKER_HOST tcp://192.168.59.103:2376
+set -x DOCKER_TLS_VERIFY 1
+set -x DOCKER_CERT_PATH /Users/ovstetun/.boot2docker/certs/boot2docker-vm
 
 set -x GOPATH $HOME/go
 set -x PATH $PATH $GOPATH/bin
