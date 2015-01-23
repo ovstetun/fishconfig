@@ -50,10 +50,9 @@ end
 
 function b2d; boot2docker $argv; end
 
-
-set -x DOCKER_HOST tcp://192.168.59.103:2376
 set -x DOCKER_TLS_VERIFY 1
-set -x DOCKER_CERT_PATH /Users/ovstetun/.boot2docker/certs/boot2docker-vm
+set -x DOCKER_HOST tcp://192.168.59.103:2376
+set -x DOCKER_CERT_PATH $HOME/.boot2docker/certs/boot2docker-vm
 
 set -x GOPATH $HOME/go
 set -x PATH $PATH $GOPATH/bin
